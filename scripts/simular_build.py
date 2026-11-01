@@ -1,7 +1,7 @@
 import os
 import py_compile
 
-ARQS_REQUIRIDOS = ['src/main.py', 'src/qml/main.qml', 'src/logica_anotacao.py']
+ARQS_REQUIRIDOS = ['src/main.py', 'src/qml/Main.qml', 'src/logica_anotacao.py']
 
 print("Verificando arquivos essenciais para o build...")
 for filepath in ARQS_REQUIRIDOS:

@@ -7,7 +7,7 @@ def test_qml_engine_carrega_main():
     app = QGuiApplication.instance() or QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
     
-    qml_path = os.path.join(os.path.dirname(__file__), '..', '..', 'src', 'main.qml')
+    qml_path = os.path.join(os.path.dirname(__file__), '..', '..', 'src', 'Main.qml')
     engine.load(qml_path)
     
-    assert engine.rootObjects(), "Falha ao carregar o main.qml. Verifique os imports e a sintaxe."
+    assert engine.rootObjects(), "Falha ao carregar o Main.qml. Verifique os imports e a sintaxe."

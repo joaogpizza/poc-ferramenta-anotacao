@@ -24,7 +24,7 @@ def main():
 
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
-    qml_main = os.path.join(os.path.dirname(__file__), "qml", "main.qml")
+    qml_main = os.path.join(os.path.dirname(__file__), "qml", "Main.qml")
     engine.load(qml_main)
 
     if not engine.rootObjects():

@@ -1,0 +1,3 @@
+module ProAfrica.Components
+singleton Theme 1.0 Theme.qml
+AppButton 1.0 AppButton.qml
