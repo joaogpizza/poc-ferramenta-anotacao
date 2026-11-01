@@ -1,9 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 
-import ProAfrica.Backend
-import ProAfrica.Components
-import ProAfrica.Pages
+import Backend
+import Components
+import Pages
 
 ApplicationWindow {
     id: mainWindow

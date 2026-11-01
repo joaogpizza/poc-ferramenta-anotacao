@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 
-import ProAfrica.Components
+import Components
 
 ApplicationWindow {
     id: settingsWindow

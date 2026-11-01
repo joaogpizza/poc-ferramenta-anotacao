@@ -1,7 +1,7 @@
 import QtQml
 
-import ProAfrica.Backend
-import ProAfrica.Windows
+import Backend
+import Windows
 
 // Orquestrador: recebe os ViewModels do Python, cria as janelas
 // e liga os sinais entre elas. Nenhuma janela conhece a outra.

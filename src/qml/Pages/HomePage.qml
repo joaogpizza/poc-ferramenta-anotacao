@@ -2,8 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import ProAfrica.Backend
-import ProAfrica.Components
+import Backend
+import Components
 
 // Página: recebe o ViewModel e só desenha / repassa ações.
 Item {
