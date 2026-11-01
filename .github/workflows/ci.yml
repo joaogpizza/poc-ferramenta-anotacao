@@ -40,7 +40,7 @@ jobs:
 
       - name: Run qmllint
         run: |
-          find src/ -name "*.qml" -exec qmllint {} +
+          find src/ -name "*.qml" -exec pyside6-qmllint {} +
 
       - name: Run Unit Tests
         env:
