@@ -1,6 +1,7 @@
+import argparse
 import os
 import sys
-import argparse
+
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
 

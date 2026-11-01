@@ -1,4 +1,5 @@
 import pytest
+
 from logica_anotacao import formato_anotacao
 
 
