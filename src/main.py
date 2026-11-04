@@ -5,6 +5,8 @@ import sys
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
 
+from backend.home_view_model import HomeViewModel
+
 
 def main():
     # =====================================================================
@@ -26,8 +28,17 @@ def main():
 
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
-    qml_main = os.path.join(os.path.dirname(__file__), "qml", "Main.qml")
-    engine.load(qml_main)
+    qml_dir = os.path.join(os.path.dirname(__file__), "qml")
+
+    # Permite ao QML achar os módulos locais (Windows, Pages, Components).
+    engine.addImportPath(qml_dir)
+
+    # Python cria o ViewModel e o entrega ao Main.qml (required property).
+    # A variável precisa continuar viva enquanto o app roda.
+    home_view_model = HomeViewModel()
+    engine.setInitialProperties({"homeViewModel": home_view_model})
+
+    engine.load(os.path.join(qml_dir, "Main.qml"))
 
     if not engine.rootObjects():
         sys.exit(-1)
