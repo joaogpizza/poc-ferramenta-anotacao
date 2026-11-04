@@ -1,0 +1,72 @@
+name: Continuous Delivery
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build Artifacts and Release
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Build Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyInstaller PySide6
+          pip install -r requirements.txt
+
+      - name: Install xvfb (Linux Display Server for Smoke Test)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
+      - name: Build with PyInstaller
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" == "Windows" ]; then
+            pyinstaller --noconfirm --onedir --windowed --add-data "src/qml;qml" --name MyAppPoC src/main.py
+          else
+            pyinstaller --noconfirm --onedir --windowed --add-data "src/qml:qml" --name MyAppPoC src/main.py
+          fi
+
+      - name: Basic Smoke Test on Packaged Artifact
+        shell: bash
+        run: |
+          echo "Executando Smoke Test solicitando a versão do executável gerado..."
+          if [ "$RUNNER_OS" == "Windows" ]; then
+            ./dist/MyAppPoC/MyAppPoC.exe --version
+          else
+            # xvfb-run evita que a inicialização do QGuiApplication quebre, mesmo executando apenas --version
+            xvfb-run -a ./dist/MyAppPoC/MyAppPoC --version
+          fi
+          
+      - name: Zip Build (Windows)
+        if: runner.os == 'Windows'
+        run: Compress-Archive -Path dist/MyAppPoC -DestinationPath MyAppPoC-Windows.zip
+
+      - name: Tar Build (Linux)
+        if: runner.os == 'Linux'
+        run: tar -czvf MyAppPoC-Linux.tar.gz -C dist MyAppPoC
+
+      - name: Upload and Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            MyAppPoC-Windows.zip
+            MyAppPoC-Linux.tar.gz
+          generate_release_notes: true
