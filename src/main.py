@@ -2,12 +2,6 @@ import argparse
 import os
 import sys
 
-from PySide6.QtGui import QGuiApplication
-from PySide6.QtQml import QQmlApplicationEngine
-
-from backend.home_view_model import HomeViewModel
-
-
 def main():
     # =====================================================================
     # [ATENÇÃO - NÃO REMOVA] BLOCO RESERVADO PARA CI/CD
@@ -25,6 +19,11 @@ def main():
     # =====================================================================
     # FIM DO BLOCO RESERVADO PARA CI/CD
     # =====================================================================
+
+    from PySide6.QtGui import QGuiApplication
+    from PySide6.QtQml import QQmlApplicationEngine
+
+    from backend.home_view_model import HomeViewModel
 
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
