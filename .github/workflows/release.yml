@@ -31,9 +31,9 @@ jobs:
           pip install PyInstaller PySide6
           pip install -r requirements.txt
 
-      - name: Install xvfb (Linux Display Server for Smoke Test)
+      - name: Install xvfb and EGL(Linux Display Server for Smoke Test)
         if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y xvfb
+        run: sudo apt-get update && sudo apt-get install -y xvfb libegl1
 
       - name: Build with PyInstaller
         shell: bash
