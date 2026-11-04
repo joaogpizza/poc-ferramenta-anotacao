@@ -1,0 +1,3 @@
+module Windows
+MainWindow 1.0 MainWindow.qml
+SettingsWindow 1.0 SettingsWindow.qml

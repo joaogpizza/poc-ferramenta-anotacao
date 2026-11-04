@@ -8,7 +8,6 @@ on:
 
 jobs:
   ci-validation:
-    name: Code Quality and Unit Tests
     runs-on: ubuntu-latest
     
     steps:
