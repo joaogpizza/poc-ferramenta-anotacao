@@ -7,7 +7,6 @@ on:
 
 jobs:
   integration-tests:
-    name: Build & Integration Validation
     runs-on: ubuntu-latest
     
     steps:
